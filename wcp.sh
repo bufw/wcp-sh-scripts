@@ -34,6 +34,7 @@ groupadd ${web_group}
 useradd -s /sbin/nologin -g ${web_group} ${web_user}
 
 #创建web目录 和 数据存放目录
+mkdir ${WCP_PATH}
 mkdir -p ${APP_PATH}
 mkdir -p ${APP_LOGS}
 mkdir -p ${WEB_ROOT}
@@ -42,6 +43,7 @@ chown -R ${web_user}:${web_group} ${APP_PATH}
 chown -R ${web_user}:${web_group} ${APP_LOGS}
 chown -R ${web_user}:${web_group} ${WEB_ROOT}
 chown -R ${web_user}:${web_group} ${SSL_PATH}
+chown -R ${web_user}:${web_group} ${WCP_PATH}
 
 
 WCP_ACTION=$1
@@ -53,17 +55,18 @@ fi
 
 
 auto_install_lamp() {
-#	install_expat
+	install_expat
 	install_openssl
 	install_pcre
 	install_zlib
-	pwd
+	cd ${WCP_ROOT} 	
 	. ./apache.sh
 	echo "install apache"
 	install_apache
 
 
 }
+
 
 
 

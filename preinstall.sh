@@ -46,8 +46,9 @@ install_openssl(){
 	if [ -f "/etc/ld.so.conf.d/wcp-openssl.conf" ]; then
 		rm -rf /etc/ld.so.conf.d/wcp-openssl.conf
 	fi
-	echo "${APP_PATH}/apps/openssl-${openssl_version}/lib" > /etc/ld.so.conf.d/wcp-openssl.conf
-	ldconfig
+	#echo "${APP_PATH}/apps/openssl-${openssl_version}/lib" > /etc/ld.so.conf.d/wcp-openssl.conf
+	#ldconfig
+	cd ${WCP_ROOT}
 }
 
 
