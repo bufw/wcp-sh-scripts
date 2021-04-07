@@ -64,10 +64,20 @@ cd ${WCP_BUILD}/httpd-${apache_version}
 	--with-pcre \
 	--with-included-apr \
 	--with-apr-util \
-	--enable-remoteip
+	--enable-remoteip \
+	--enable-static-support \
+	--enable-expires
 # --enable-http2 --with-nghttp2=/usr/local/nghttp2   http2
 make
 make install
+
+if [ -e "${apache_install_dir}/bin/httpd" ]; then
+    echo "Apache installed successfully!"
+else
+    echo "Apache install failed"
+    exit 1
+fi
+
 
 #sed -i 's/^#Include conf\/extra\/httpd-ssl.conf/Include conf\/extra\/httpd-ssl.conf/g' httpd.conf
 # startup script
@@ -86,8 +96,8 @@ PrivateTmp=false
 
 [Install]
 WantedBy=multi-user.target
-' > /etc/systemd/system/httpd.service
-
+' > /lib/systemd/system/httpd.service
+systemctl enable httpd
 
 cd ${WCP_ROOT}
 

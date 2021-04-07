@@ -38,7 +38,7 @@ install_zlib(){
 install_openssl(){
 	Uncompress_targz ${WCP_SRC}/openssl-${openssl_version}.tar.gz ${WCP_BUILD}
 	cd openssl-${openssl_version}
-	./config enable-weak-ssl-ciphers -fPIC --prefix=${APP_PATH}/apps/openssl-${openssl_version} --openssldir=${APP_PATH}/apps/openssl-${openssl_version}
+	./config -Wl,-rpath=${APP_PATH}/openssl-${openssl_version}/lib enable-weak-ssl-ciphers -fPIC --prefix=${APP_PATH}/openssl-${openssl_version} --openssldir=${APP_PATH}/openssl-${openssl_version}
 	make depend
 	make
 	make install
@@ -46,7 +46,7 @@ install_openssl(){
 	if [ -f "/etc/ld.so.conf.d/wcp-openssl.conf" ]; then
 		rm -rf /etc/ld.so.conf.d/wcp-openssl.conf
 	fi
-	#echo "${APP_PATH}/apps/openssl-${openssl_version}/lib" > /etc/ld.so.conf.d/wcp-openssl.conf
+	#echo "${APP_PATH}/openssl-${openssl_version}/lib" > /etc/ld.so.conf.d/wcp-openssl.conf
 	#ldconfig
 	cd ${WCP_ROOT}
 }

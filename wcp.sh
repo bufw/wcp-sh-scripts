@@ -28,6 +28,7 @@ WCP_DB_PASSWD=`< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c16`
 . ./config.ini
 . ./functions.sh
 . ./preinstall.sh
+. ./apache.sh
 
 #创建用户和组
 groupadd ${web_group}
@@ -59,8 +60,6 @@ auto_install_lamp() {
 	install_openssl
 	install_pcre
 	install_zlib
-	cd ${WCP_ROOT} 	
-	. ./apache.sh
 	echo "install apache"
 	install_apache
 
