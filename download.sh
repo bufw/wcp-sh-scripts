@@ -1,7 +1,10 @@
 #!/bin/sh
+<<<<<<< HEAD
 if [ ! -d src ];then
 	mkdir src
 fi
+=======
+>>>>>>> 1a91716a6626fde0c549415edc7f26d5e85230ae
 cd /root/wcp/src
 . ../functions.sh
 . ../config.ini
